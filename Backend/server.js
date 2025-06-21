@@ -16,9 +16,9 @@ app.use('/uploads', express.static('uploads'));
 // PostgreSQL connection
 const pool = new Pool({
     user: 'postgres',
-    host: 'localhost',
+    host: 'postgres',
     database: 'job_application_db',
-    password: 'root',
+    password: 'admin321',
     port: 5432,
 });
 
@@ -301,5 +301,5 @@ app.delete('/api/applications', async (req, res) => {
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Server running at http://16.170.252.11:${port}`);
 });
