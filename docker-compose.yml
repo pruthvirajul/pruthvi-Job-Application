@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  employee-job:
+    build: ./Employee-job
+    ports:
+      - "6025:80"
+    networks:
+      - app-network
+
+  hr-job:
+    build: ./HR-job
+    ports:
+      - "6026:80"
+    networks:
+      - app-network
+
+  backend:
+    build: ./Backend
+    ports:
+      - "3008:3008"
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin234
+      POSTGRES_DB: job_application_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5121:5432"
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
